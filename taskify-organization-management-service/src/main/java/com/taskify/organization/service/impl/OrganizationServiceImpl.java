@@ -1,8 +1,10 @@
 package com.taskify.organization.service.impl;
 
 import com.taskify.organization.client.AccountClient;
-import com.taskify.organization.controller.dto.OrganizationCreationRequest;
-import com.taskify.organization.controller.dto.OrganizationResponse;
+import com.taskify.organization.client.dto.AccountResponse;
+import com.taskify.organization.client.dto.RegistrationRequest;
+import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
+import com.taskify.organization.controller.dto.organization.OrganizationResponse;
 import com.taskify.organization.entity.Organization;
 import com.taskify.organization.entity.OrganizationAccountCollection;
 import com.taskify.organization.entity.enums.OrganizationStatus;
@@ -16,6 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -26,12 +29,18 @@ public class OrganizationServiceImpl implements OrganizationService {
     private final AccountClient accountClient;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public OrganizationResponse create(OrganizationCreationRequest request) {
         Organization organization = OrganizationMapper.INSTANCE.creationRequestToEntity(request);
         organization.setStatus(OrganizationStatus.ACTIVE);
 
         Organization savedOrganization = organizationRepository.save(organization);
-        return OrganizationMapper.INSTANCE.entityToOrganizationResponse(savedOrganization);
+        OrganizationResponse organizationResponse = OrganizationMapper.INSTANCE.entityToOrganizationResponse(savedOrganization);
+
+        RegistrationRequest registrationRequest = new RegistrationRequest();
+        ResponseEntity<AccountResponse> accountResponse = accountClient.register(registrationRequest);
+
+        return null;
     }
 
     @Override

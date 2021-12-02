@@ -1,7 +1,7 @@
 package com.taskify.organization.service;
 
-import com.taskify.organization.controller.dto.OrganizationCreationRequest;
-import com.taskify.organization.controller.dto.OrganizationResponse;
+import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
+import com.taskify.organization.controller.dto.organization.OrganizationResponse;
 
 public interface OrganizationService {
 

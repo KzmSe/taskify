@@ -1,4 +1,4 @@
-package com.taskify.organization.controller.dto;
+package com.taskify.organization.controller.dto.organization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

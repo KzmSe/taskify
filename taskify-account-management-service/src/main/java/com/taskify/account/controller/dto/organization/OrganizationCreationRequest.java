@@ -1,4 +1,4 @@
-package com.taskify.organization.controller.dto;
+package com.taskify.account.controller.dto.organization;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrganizationCreationRequest {
+public class
+OrganizationCreationRequest {
 
     @NotNull
     @NotEmpty

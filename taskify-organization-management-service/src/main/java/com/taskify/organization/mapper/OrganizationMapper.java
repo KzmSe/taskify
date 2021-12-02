@@ -1,7 +1,7 @@
 package com.taskify.organization.mapper;
 
-import com.taskify.organization.controller.dto.OrganizationCreationRequest;
-import com.taskify.organization.controller.dto.OrganizationResponse;
+import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
+import com.taskify.organization.controller.dto.organization.OrganizationResponse;
 import com.taskify.organization.entity.Organization;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

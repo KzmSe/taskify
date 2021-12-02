@@ -1,7 +1,7 @@
 package com.taskify.organization.controller;
 
-import com.taskify.organization.controller.dto.OrganizationCreationRequest;
-import com.taskify.organization.controller.dto.OrganizationResponse;
+import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
+import com.taskify.organization.controller.dto.organization.OrganizationResponse;
 import com.taskify.organization.service.OrganizationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ public class OrganizationController {
     }
 
     @PostMapping("/organizations")
-    @ApiOperation(value = "Create a new organization")
+    @ApiOperation(value = "Create a new organization with default account")
     public ResponseEntity<OrganizationResponse> create(@Valid @RequestBody OrganizationCreationRequest request) {
         return ResponseEntity.ok(organizationService.create(request));
     }
