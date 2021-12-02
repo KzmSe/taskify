@@ -1,6 +1,7 @@
 package com.taskify.account.controller.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.taskify.account.entity.enums.AccountRole;
 import com.taskify.account.entity.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class AccountResponse {
     private String surname;
     private String email;
     private AccountStatus status;
+    private AccountRole role;
 }

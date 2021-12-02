@@ -35,6 +35,13 @@ public class AccountController {
         return ResponseEntity.ok(accountService.create(request));
     }
 
+    @PostMapping("/accounts/{accountId}/organizations/{organizationId}")
+    @ApiOperation(value = "Assign account to organization")
+    public ResponseEntity<Boolean> assign(@PathVariable(name = "accountId") Long accountId,
+                                          @PathVariable(name = "organizationId") Long organizationId) {
+        return ResponseEntity.ok(accountService.assign(organizationId, accountId));
+    }
+
     @GetMapping("/accounts/{accountId}/existence")
     @ApiOperation(value = "Check account with given id is exist")
     public ResponseEntity<Boolean> isAccountExist(@PathVariable(name = "accountId") Long accountId) {

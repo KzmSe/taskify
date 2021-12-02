@@ -7,9 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "account")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,4 +41,7 @@ public class Account {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private AccountRole role;
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private Set<AccountOrganizationCollection> organizationCollection = new HashSet<>();
 }

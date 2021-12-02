@@ -7,5 +7,5 @@ public interface OrganizationService {
 
     OrganizationResponse create(OrganizationCreationRequest request);
 
-    Boolean assign(Long organizationId, Long accountId);
+    Boolean isOrganizationExist(Long organizationId);
 }

@@ -10,5 +10,7 @@ public interface AccountService {
 
     AccountResponse create(AccountCreationRequest request);
 
+    Boolean assign(Long organizationId, Long accountId);
+
     Boolean isAccountExist(Long accountId);
 }

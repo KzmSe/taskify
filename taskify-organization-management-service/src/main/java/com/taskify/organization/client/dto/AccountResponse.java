@@ -1,6 +1,7 @@
 package com.taskify.organization.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.taskify.organization.client.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

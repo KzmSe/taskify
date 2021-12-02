@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "organization")
@@ -33,7 +31,4 @@ public class Organization {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private OrganizationStatus status;
-
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
-    private Set<OrganizationAccountCollection> accountCollection = new HashSet<>();
 }

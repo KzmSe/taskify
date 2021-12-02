@@ -13,7 +13,7 @@ public class AccountCreationRequest {
 
     @NotNull
     @NotEmpty
-    private String accountName;
+    private String name;
     @NotNull
     @NotEmpty
     private String surname;

@@ -1,4 +1,4 @@
-package com.taskify.organization.entity;
+package com.taskify.account.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "organization_account_collection")
+@Table(name = "account_organization_collection")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrganizationAccountCollection {
+public class AccountOrganizationCollection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,9 @@ public class OrganizationAccountCollection {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_organization_id")
-    private Organization organization;
+    @JoinColumn(name = "fk_account_id")
+    private Account account;
 
-    @Column(name = "account_id")
-    private Long accountId;
+    @Column(name = "organization_id")
+    private Long organizationId;
 }

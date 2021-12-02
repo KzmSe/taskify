@@ -26,5 +26,6 @@ public class OrganizationCreationRequest {
     @NotEmpty
     private String address;
 
-    @Valid AccountCreationRequest account;
+    @Valid
+    private AccountCreationRequest account;
 }
