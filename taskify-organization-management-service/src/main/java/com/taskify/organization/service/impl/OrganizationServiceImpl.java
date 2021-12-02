@@ -7,16 +7,21 @@ import com.taskify.organization.entity.enums.OrganizationStatus;
 import com.taskify.organization.mapper.OrganizationMapper;
 import com.taskify.organization.repository.OrganizationRepository;
 import com.taskify.organization.service.OrganizationService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
     private final AccountClient accountClient;
+
+    @Autowired
+    public OrganizationServiceImpl(OrganizationRepository organizationRepository, AccountClient accountClient) {
+        this.organizationRepository = organizationRepository;
+        this.accountClient = accountClient;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

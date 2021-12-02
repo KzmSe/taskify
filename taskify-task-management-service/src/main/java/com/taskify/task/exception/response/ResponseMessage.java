@@ -1,0 +1,9 @@
+package com.taskify.task.exception.response;
+
+public class ResponseMessage {
+
+    public final static String ERROR_ORGANIZATION_NOT_FOUND_BY_ID = "Country not found with given id";
+    public final static String ERROR_ACCOUNT_NOT_FOUND_BY_ID = "Country not found with given id";
+    public final static String ERROR_TASK_NOT_FOUND_BY_ID = "Task not found with given id";
+    public final static String ERROR_INTERNAL_SERVER_ERROR = "Internal server error.";
+}

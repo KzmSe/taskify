@@ -15,6 +15,7 @@ import com.taskify.account.repository.AccountRepository;
 import com.taskify.account.repository.OrganizationCollectionRepository;
 import com.taskify.account.service.AccountService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
@@ -31,6 +31,15 @@ public class AccountServiceImpl implements AccountService {
     private final OrganizationCollectionRepository organizationCollectionRepository;
     @Value("${account.default.password}")
     private String defaultPassword;
+
+    @Autowired
+    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder, OrganizationClient organizationClient, OrganizationCollectionRepository organizationCollectionRepository, String defaultPassword) {
+        this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.organizationClient = organizationClient;
+        this.organizationCollectionRepository = organizationCollectionRepository;
+        this.defaultPassword = defaultPassword;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
