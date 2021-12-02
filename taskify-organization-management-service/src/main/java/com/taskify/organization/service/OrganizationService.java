@@ -6,4 +6,6 @@ import com.taskify.organization.controller.dto.OrganizationResponse;
 public interface OrganizationService {
 
     OrganizationResponse create(OrganizationCreationRequest request);
+
+    Boolean assign(Long organizationId, Long accountId);
 }
