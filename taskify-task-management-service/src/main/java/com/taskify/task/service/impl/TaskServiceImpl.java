@@ -56,11 +56,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean assignToOrganization(Long taskId, Long organizationId) {
-        var isTaskExist = taskRepository.existsByIdAndStatus(taskId, TaskStatus.OPEN);
-        if (!isTaskExist) {
-            throw new DataNotFoundException(ResponseMessage.ERROR_TASK_NOT_FOUND_BY_ID);
-        }
-
         var collection = new TaskAccountCollection();
         collection.setOrganizationId(organizationId);
         var task = new Task();

@@ -43,10 +43,10 @@ public class TaskController {
         return ResponseEntity.ok(taskService.findAllByOrganization(organizationId));
     }
 
-    @GetMapping("/tasks/{taskId}/accounts/{accountId}")
+    @GetMapping("/organizations/{organizationId}/accounts/{accountId}/tasks")
     @ApiOperation(value = "Assign task to account")
     public ResponseEntity<List<TaskResponse>> findAllByAccount(@PathVariable(name = "organizationId") Long organizationId,
-                                                               @PathVariable(name = "taskId") Long taskId) {
-        return ResponseEntity.ok(taskService.findAllByAccount(organizationId, taskId));
+                                                               @PathVariable(name = "accountId") Long accountId) {
+        return ResponseEntity.ok(taskService.findAllByAccount(organizationId, accountId));
     }
 }
