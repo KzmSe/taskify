@@ -22,7 +22,7 @@ public class Organization {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone-number")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "address")

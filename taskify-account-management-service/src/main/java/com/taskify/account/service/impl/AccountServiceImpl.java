@@ -33,12 +33,11 @@ public class AccountServiceImpl implements AccountService {
     private String defaultPassword;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder, OrganizationClient organizationClient, OrganizationCollectionRepository organizationCollectionRepository, String defaultPassword) {
+    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder, OrganizationClient organizationClient, OrganizationCollectionRepository organizationCollectionRepository) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
         this.organizationClient = organizationClient;
         this.organizationCollectionRepository = organizationCollectionRepository;
-        this.defaultPassword = defaultPassword;
     }
 
     @Override

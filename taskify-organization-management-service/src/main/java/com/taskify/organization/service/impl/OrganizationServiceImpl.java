@@ -3,6 +3,7 @@ package com.taskify.organization.service.impl;
 import com.taskify.organization.client.AccountClient;
 import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
 import com.taskify.organization.controller.dto.organization.OrganizationResponse;
+import com.taskify.organization.entity.Organization;
 import com.taskify.organization.entity.enums.OrganizationStatus;
 import com.taskify.organization.mapper.OrganizationMapper;
 import com.taskify.organization.repository.OrganizationRepository;
