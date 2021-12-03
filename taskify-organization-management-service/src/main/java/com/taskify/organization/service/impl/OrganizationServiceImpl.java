@@ -1,6 +1,7 @@
 package com.taskify.organization.service.impl;
 
 import com.taskify.organization.client.AccountClient;
+import com.taskify.organization.client.dto.RegistrationRequest;
 import com.taskify.organization.controller.dto.organization.OrganizationCreationRequest;
 import com.taskify.organization.controller.dto.organization.OrganizationResponse;
 import com.taskify.organization.entity.Organization;

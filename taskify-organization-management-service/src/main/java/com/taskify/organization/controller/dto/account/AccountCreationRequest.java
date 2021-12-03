@@ -22,6 +22,6 @@ public class AccountCreationRequest {
     private String email;
     @NotNull
     @NotEmpty
-    @Min(6)
+    @Size(min = 6, max = 20)
     private String password;
 }

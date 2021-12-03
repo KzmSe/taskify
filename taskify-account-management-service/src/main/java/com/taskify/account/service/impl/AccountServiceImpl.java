@@ -52,6 +52,7 @@ public class AccountServiceImpl implements AccountService {
         var accountResponse = AccountMapper.INSTANCE.entityToAccountResponse(savedAccount);
 
         var isAssigned = assign(request.getOrganizationId(), savedAccount.getId());
+
         if (!isAssigned) {
             //throw new Exception(ResponseMessage.ERROR_INTERNAL_SERVER_ERROR);
         }
@@ -75,11 +76,6 @@ public class AccountServiceImpl implements AccountService {
         var isAccountExist = accountRepository.existsByIdAndStatus(accountId, AccountStatus.ACTIVE);
         if (!isAccountExist) {
             throw new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID);
-        }
-
-        var isOrganizationExist = organizationClient.existsByIdAndStatus(organizationId);
-        if (isOrganizationExist.getStatusCodeValue() != HttpStatus.OK.value() || Boolean.FALSE.equals(isOrganizationExist.getBody())) {
-            throw new DataNotFoundException(ResponseMessage.ERROR_ORGANIZATION_NOT_FOUND_BY_ID);
         }
 
         var collection = new AccountOrganizationCollection();

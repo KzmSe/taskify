@@ -23,7 +23,6 @@ public class RegistrationRequest {
     @NotNull
     @NotEmpty
     @Min(6)
-    @Max(20)
     private String password;
     @NotNull
     @Positive
