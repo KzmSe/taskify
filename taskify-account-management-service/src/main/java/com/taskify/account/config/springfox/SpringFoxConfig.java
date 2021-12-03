@@ -1,4 +1,4 @@
-package com.taskify.account.config;
+package com.taskify.account.config.springfox;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
