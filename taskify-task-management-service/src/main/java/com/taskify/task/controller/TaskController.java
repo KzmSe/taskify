@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Api(value = "Operations related to organization in Taskify Task Management Service")
@@ -28,9 +29,23 @@ public class TaskController {
         return ResponseEntity.ok(taskService.create(request));
     }
 
-//    @GetMapping("/organizations/{organizationId}/existence")
-//    @ApiOperation(value = "Check organization with given id is exist")
-//    public ResponseEntity<Boolean> isOrganizationExist(@PathVariable(name = "organizationId") Long organizationId) {
-//        return ResponseEntity.ok(organizationService.isOrganizationExist(organizationId));
-//    }
+    @PostMapping("/tasks/{taskId}/accounts/{accountId}")
+    @ApiOperation(value = "Assign task to account")
+    public ResponseEntity<Boolean> assignToAccount(@PathVariable(name = "taskId") Long taskId,
+                                                   @PathVariable(name = "accountId") Long accountId) {
+        return ResponseEntity.ok(taskService.assignToAccount(taskId, accountId));
+    }
+
+    @GetMapping("/organizations/{organizationId}/tasks")
+    @ApiOperation(value = "Find all tasks by organization id")
+    public ResponseEntity<List<TaskResponse>> findAllByOrganization(@PathVariable(name = "organizationId") Long organizationId) {
+        return ResponseEntity.ok(taskService.findAllByOrganization(organizationId));
+    }
+
+    @GetMapping("/tasks/{taskId}/accounts/{accountId}")
+    @ApiOperation(value = "Assign task to account")
+    public ResponseEntity<List<TaskResponse>> findAllByAccount(@PathVariable(name = "organizationId") Long organizationId,
+                                                               @PathVariable(name = "taskId") Long taskId) {
+        return ResponseEntity.ok(taskService.findAllByAccount(organizationId, taskId));
+    }
 }

@@ -6,6 +6,8 @@ import com.taskify.task.entity.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface TaskMapper {
 
@@ -14,4 +16,6 @@ public interface TaskMapper {
     Task creationRequestToEntity(TaskCreationRequest request);
 
     TaskResponse entityToTaskResponse(Task task);
+
+    List<TaskResponse> entityListToResponseList(List<Task> taskList);
 }
