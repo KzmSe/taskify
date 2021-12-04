@@ -1,6 +1,5 @@
 package com.taskify.account.service.impl;
 
-import com.taskify.account.client.OrganizationClient;
 import com.taskify.account.controller.dto.account.AccountCreationRequest;
 import com.taskify.account.controller.dto.account.AccountResponse;
 import com.taskify.account.controller.dto.account.RegistrationRequest;
@@ -14,10 +13,9 @@ import com.taskify.account.mapper.AccountMapper;
 import com.taskify.account.repository.AccountRepository;
 import com.taskify.account.repository.OrganizationCollectionRepository;
 import com.taskify.account.service.AccountService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,16 +27,14 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
-    private final OrganizationClient organizationClient;
     private final OrganizationCollectionRepository organizationCollectionRepository;
     @Value("${account.default.password}")
     private String defaultPassword;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder, OrganizationClient organizationClient, OrganizationCollectionRepository organizationCollectionRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder, OrganizationCollectionRepository organizationCollectionRepository) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
-        this.organizationClient = organizationClient;
         this.organizationCollectionRepository = organizationCollectionRepository;
     }
 
@@ -100,6 +96,10 @@ public class AccountServiceImpl implements AccountService {
         var optionalAccount = accountRepository.findByEmailAndStatus(s, AccountStatus.ACTIVE);
         optionalAccount.orElseThrow(() -> new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID));
 
-        return optionalAccount.get();
+        return new User(
+                optionalAccount.get().getUsername(),
+                optionalAccount.get().getPassword(),
+                optionalAccount.get().getAuthorities()
+        );
     }
 }

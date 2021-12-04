@@ -5,6 +5,7 @@ import com.taskify.account.entity.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Account implements UserDetails {
 
     @Id
@@ -49,9 +51,8 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(this.role);
-        return authorities;
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        return Collections.singletonList(authority);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.status.equals(AccountStatus.BLOCKED);
+        return !this.status.equals(AccountStatus.BLOCKED);
     }
 
     @Override
