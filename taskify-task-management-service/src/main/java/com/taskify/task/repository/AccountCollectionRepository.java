@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AccountCollectionRepository extends JpaRepository<TaskAccountCollection, Long> {
 
-    Optional<TaskAccountCollection> findById(Long taskId);
+    Boolean existsByTask_IdAndAccountId(Long taskId, Long accountId);
 }

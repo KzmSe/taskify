@@ -14,6 +14,7 @@ import com.taskify.task.repository.TaskRepository;
 import com.taskify.task.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,43 +41,29 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponse create(TaskCreationRequest request) {
         var task = TaskMapper.INSTANCE.creationRequestToEntity(request);
         task.setStatus(TaskStatus.OPEN);
+        task.setOrganizationId(request.getOrganizationId());
 
         var savedTask = taskRepository.save(task);
-        var taskResponse = TaskMapper.INSTANCE.entityToTaskResponse(savedTask);
-
-        assignToOrganization(savedTask.getId(), request.getOrganizationId());
-
-        taskResponse.setOrganizationId(request.getOrganizationId());
-        return taskResponse;
+        return TaskMapper.INSTANCE.entityToTaskResponse(savedTask);
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Boolean assignToOrganization(Long taskId, Long organizationId) {
-        var collection = new TaskAccountCollection();
-        collection.setOrganizationId(organizationId);
-        var task = new Task();
-        task.setId(taskId);
-        collection.setTask(task);
-
-        var savedCollection = accountCollectionRepository.save(collection);
-        return savedCollection.getId() != null;
-    }
-
-    @Override
-    public Boolean assignToAccount(String authHeader, Long taskId, Long accountId) {
-        var optionalTask = accountCollectionRepository.findById(taskId);
-        optionalTask.orElseThrow(() -> new DataNotFoundException(ResponseMessage.ERROR_TASK_NOT_FOUND_BY_ID));
-        var task = optionalTask.get();
+    public Boolean assign(String authHeader, Long taskId, Long accountId) {
+        var isAssignmentExist = accountCollectionRepository.existsByTask_IdAndAccountId(taskId, accountId);
+        if (isAssignmentExist) {
+            throw new DataIntegrityViolationException(ResponseMessage.ERROR_TASK_IS_ALREADY_ASSIGNED_TO_ACCOUNT);
+        }
 
         var isAccountExist = accountClient.isAccountExist(authHeader, accountId);
         if (isAccountExist.getStatusCodeValue() != HttpStatus.OK.value() || Boolean.FALSE.equals(isAccountExist.getBody())) {
             throw new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID);
         }
 
-        task.setAccountId(accountId);
+        TaskAccountCollection collection = new TaskAccountCollection();
+        collection.setTask(Task.builder().id(taskId).build());
+        collection.setAccountId(accountId);
 
-        var savedCollection = accountCollectionRepository.save(task);
+        var savedCollection = accountCollectionRepository.save(collection);
         return savedCollection.getId() != null;
     }
 

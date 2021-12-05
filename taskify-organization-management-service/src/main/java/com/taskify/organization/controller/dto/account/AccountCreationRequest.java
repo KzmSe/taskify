@@ -26,5 +26,7 @@ public class AccountCreationRequest {
     @NotNull
     @NotEmpty
     @Size(min = 6, max = 20)
+    //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])$",
+    //message = "must contain at least one digit, one lower case, one upper case, one special character")
     private String password;
 }

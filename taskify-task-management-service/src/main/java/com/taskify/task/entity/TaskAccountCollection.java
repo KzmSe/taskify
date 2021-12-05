@@ -19,12 +19,9 @@ public class TaskAccountCollection {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_task_id")
+    @JoinColumn(name = "fk_task_id", nullable = false)
     private Task task;
 
     @Column(name = "account_id")
     private Long accountId;
-
-    @Column(name = "organization_id")
-    private Long organizationId;
 }

@@ -9,9 +9,7 @@ public interface TaskService {
 
     TaskResponse create(TaskCreationRequest request);
 
-    Boolean assignToOrganization(Long taskId, Long organizationId);
-
-    Boolean assignToAccount(String authHeader, Long taskId, Long accountId);
+    Boolean assign(String authHeader, Long taskId, Long accountId);
 
     List<TaskResponse> findAllByOrganization(Long organizationId);
 

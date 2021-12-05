@@ -35,10 +35,10 @@ public class TaskController {
     @PostMapping("/tasks/{taskId}/accounts/{accountId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Assign task to account")
-    public ResponseEntity<Boolean> assignToAccount(@PathVariable(name = "taskId") Long taskId,
-                                                   @PathVariable(name = "accountId") Long accountId,
-                                                   @RequestHeader(name = "Authorization") String authHeader) {
-        return ResponseEntity.ok(taskService.assignToAccount(authHeader, taskId, accountId));
+    public ResponseEntity<Boolean> assign(@PathVariable(name = "taskId") Long taskId,
+                                          @PathVariable(name = "accountId") Long accountId,
+                                          @RequestHeader(name = "Authorization") String authHeader) {
+        return ResponseEntity.ok(taskService.assign(authHeader, taskId, accountId));
     }
 
     @GetMapping("/organizations/{organizationId}/tasks")

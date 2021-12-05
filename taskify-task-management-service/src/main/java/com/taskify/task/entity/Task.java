@@ -2,6 +2,7 @@ package com.taskify.task.entity;
 
 import com.taskify.task.entity.enums.TaskStatus;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Task {
 
     @Id
@@ -34,6 +36,9 @@ public class Task {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
+
+    @Column(name = "organization_id")
+    private Long organizationId;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
     private Set<TaskAccountCollection> accountCollection = new HashSet<>();
