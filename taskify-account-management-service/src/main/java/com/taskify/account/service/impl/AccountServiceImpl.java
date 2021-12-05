@@ -94,7 +94,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         var optionalAccount = accountRepository.findByEmailAndStatus(s, AccountStatus.ACTIVE);
-        optionalAccount.orElseThrow(() -> new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID));
+        optionalAccount.orElseThrow(() -> new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_EMAIL));
 
         return new User(
                 optionalAccount.get().getUsername(),

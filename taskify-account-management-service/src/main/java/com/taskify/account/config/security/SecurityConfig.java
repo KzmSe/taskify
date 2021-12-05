@@ -40,8 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/registration").permitAll();
-        //http.authorizeRequests().antMatchers(HttpMethod.GET, "/smt/**").hasAuthority("ROLE_USER");
-        //http.authorizeRequests().antMatchers(HttpMethod.POST, "/smt/**").hasAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
