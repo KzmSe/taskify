@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface AccountClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/waccountms/accounts/{accountId}/existence")
-    ResponseEntity<Boolean> isAccountExist(@RequestHeader(value = "Authorization") String authHeader,
+    Boolean isAccountExist(@RequestHeader(value = "Authorization") String authHeader,
                                            @PathVariable(name = "accountId") Long accountId);
 }

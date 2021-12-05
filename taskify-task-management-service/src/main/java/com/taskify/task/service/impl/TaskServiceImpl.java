@@ -55,7 +55,7 @@ public class TaskServiceImpl implements TaskService {
         }
 
         var isAccountExist = accountClient.isAccountExist(authHeader, accountId);
-        if (isAccountExist.getStatusCodeValue() != HttpStatus.OK.value() || Boolean.FALSE.equals(isAccountExist.getBody())) {
+        if (isAccountExist) {
             throw new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID);
         }
 
