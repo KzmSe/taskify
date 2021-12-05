@@ -40,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public AccountResponse register(RegistrationRequest request) {
+    public AccountResponse createDefault(RegistrationRequest request) {
         var account = AccountMapper.INSTANCE.registrationRequestToEntity(request);
         account.setPassword(passwordEncoder.encode(request.getPassword().trim()));
         account.setRole(AccountRole.ROLE_ADMIN);
@@ -49,13 +49,8 @@ public class AccountServiceImpl implements AccountService {
         var savedAccount = accountRepository.save(account);
         var accountResponse = AccountMapper.INSTANCE.entityToAccountResponse(savedAccount);
 
-        var isAssigned = assign(request.getOrganizationId(), savedAccount.getId());
-
-        if (!isAssigned) {
-            //throw new Exception(ResponseMessage.ERROR_INTERNAL_SERVER_ERROR);
-        }
-
-        return null;
+        assign(request.getOrganizationId(), savedAccount.getId());
+        return accountResponse;
     }
 
     @Override
@@ -70,6 +65,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean assign(Long organizationId, Long accountId) {
         var isAccountExist = accountRepository.existsByIdAndStatus(accountId, AccountStatus.ACTIVE);
         if (!isAccountExist) {

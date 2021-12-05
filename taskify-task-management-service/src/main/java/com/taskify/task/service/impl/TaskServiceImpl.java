@@ -44,10 +44,7 @@ public class TaskServiceImpl implements TaskService {
         var savedTask = taskRepository.save(task);
         var taskResponse = TaskMapper.INSTANCE.entityToTaskResponse(savedTask);
 
-        var isTaskAssigned = assignToOrganization(savedTask.getId(), request.getOrganizationId());
-        if (!isTaskAssigned) {
-            //throw exception
-        }
+        assignToOrganization(savedTask.getId(), request.getOrganizationId());
 
         taskResponse.setOrganizationId(request.getOrganizationId());
         return taskResponse;

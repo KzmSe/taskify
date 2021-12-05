@@ -1,6 +1,7 @@
 package com.taskify.organization.controller.dto.organization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.taskify.organization.client.dto.AccountResponse;
 import com.taskify.organization.entity.enums.OrganizationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class OrganizationResponse {
     private String phoneNumber;
     private String address;
     private OrganizationStatus status;
+    private AccountResponse account;
 }

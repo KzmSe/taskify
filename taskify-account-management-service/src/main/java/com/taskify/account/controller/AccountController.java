@@ -24,10 +24,10 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/registration")
-    @ApiOperation(value = "Create a new organization account")
-    public ResponseEntity<AccountResponse> register(@Valid @RequestBody RegistrationRequest request) {
-        return ResponseEntity.ok(accountService.register(request));
+    @PostMapping("/accounts/default")
+    @ApiOperation(value = "Create a new default account for the organization")
+    public ResponseEntity<AccountResponse> createDefault(@Valid @RequestBody RegistrationRequest request) {
+        return ResponseEntity.ok(accountService.createDefault(request));
     }
 
     @PostMapping("/accounts")

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AccountService extends UserDetailsService {
 
-    AccountResponse register(RegistrationRequest request);
+    AccountResponse createDefault(RegistrationRequest request);
 
     AccountResponse create(AccountCreationRequest request);
 

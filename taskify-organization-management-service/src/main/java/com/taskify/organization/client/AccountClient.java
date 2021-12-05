@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "${openfeign.clients.account.name}", url = "${openfeign.clients.account.url}", configuration = FeignConfig.class)
 public interface AccountClient {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/waccountms/registration")
+    @RequestMapping(method = RequestMethod.POST, value = "/waccountms/accounts/default")
     ResponseEntity<AccountResponse> register(@RequestBody RegistrationRequest request);
 }

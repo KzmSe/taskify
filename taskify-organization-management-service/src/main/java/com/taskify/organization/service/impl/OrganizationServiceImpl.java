@@ -36,7 +36,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         registrationRequest.setOrganizationId(organizationResponse.getId());
 
         var accountResponse = accountClient.register(registrationRequest);
-        return null;
+        organizationResponse.setAccount(accountResponse.getBody());
+        return organizationResponse;
     }
 
     @Override

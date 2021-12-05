@@ -14,12 +14,15 @@ public class AccountCreationRequest {
     @NotNull
     @NotEmpty
     private String name;
+
     @NotNull
     @NotEmpty
     private String surname;
+
     @NotNull
     @Email
     private String email;
+
     @NotNull
     @NotEmpty
     @Size(min = 6, max = 20)
