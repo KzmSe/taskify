@@ -6,6 +6,7 @@ import com.taskify.account.exception.response.ErrorResponse;
 import com.taskify.account.exception.response.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +86,17 @@ public class GlobalExceptionHandler {
         error.setMessage(ex.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        logger.error(ex.getMessage(), ex);
+
+        ErrorResponse error = new ErrorResponse();
+        error.setTitle(HttpStatus.CONFLICT.getReasonPhrase());
+        error.setMessage(ex.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)

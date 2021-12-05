@@ -88,29 +88,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
-//        logger.error(ex.getMessage(), ex);
-//
-//        ErrorResponse error = new ErrorResponse();
-//
-//        if (ex.getMessage().contains("account_username_uindex")) {
-//            error.setTitle(HttpStatus.CONFLICT.getReasonPhrase());
-//            error.setMessage(ResponseMessage.ERROR_USERNAME_ALREADY_EXIST);
-//            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-//        }
-//
-//        if (ex.getMessage().contains("token_access_token_uindex")) {
-//            error.setTitle(HttpStatus.CONFLICT.getReasonPhrase());
-//            error.setMessage(ResponseMessage.ERROR_TOKEN_ALREADY_EXIST);
-//            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-//        }
-//
-//        error.setTitle(HttpStatus.CONFLICT.getReasonPhrase());
-//        error.setMessage(ex.getMessage());
-//
-//        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-//    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        logger.error(ex.getMessage(), ex);
+
+        ErrorResponse error = new ErrorResponse();
+        error.setTitle(HttpStatus.CONFLICT.getReasonPhrase());
+        error.setMessage(ex.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnknown(Exception ex) {
