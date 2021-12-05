@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,12 +31,14 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Create a new account")
     public ResponseEntity<AccountResponse> create(@Valid @RequestBody AccountCreationRequest request) {
         return ResponseEntity.ok(accountService.create(request));
     }
 
     @PostMapping("/accounts/{accountId}/organizations/{organizationId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Assign account to organization")
     public ResponseEntity<Boolean> assign(@PathVariable(name = "accountId") Long accountId,
                                           @PathVariable(name = "organizationId") Long organizationId) {
