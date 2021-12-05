@@ -11,7 +11,7 @@ public interface TaskService {
 
     Boolean assignToOrganization(Long taskId, Long organizationId);
 
-    Boolean assignToAccount(Long taskId, Long accountId);
+    Boolean assignToAccount(String authHeader, Long taskId, Long accountId);
 
     List<TaskResponse> findAllByOrganization(Long organizationId);
 

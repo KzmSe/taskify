@@ -67,12 +67,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Boolean assignToAccount(Long taskId, Long accountId) {
+    public Boolean assignToAccount(String authHeader, Long taskId, Long accountId) {
         var optionalTask = accountCollectionRepository.findById(taskId);
         optionalTask.orElseThrow(() -> new DataNotFoundException(ResponseMessage.ERROR_TASK_NOT_FOUND_BY_ID));
         var task = optionalTask.get();
 
-        var isAccountExist = accountClient.isAccountExist(accountId);
+        var isAccountExist = accountClient.isAccountExist(authHeader, accountId);
         if (isAccountExist.getStatusCodeValue() != HttpStatus.OK.value() || Boolean.FALSE.equals(isAccountExist.getBody())) {
             throw new DataNotFoundException(ResponseMessage.ERROR_ACCOUNT_NOT_FOUND_BY_ID);
         }
