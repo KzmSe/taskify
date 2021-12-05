@@ -35,8 +35,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         var registrationRequest = OrganizationMapper.INSTANCE.organizationCreationRequestToRegistrationRequest(request);
         registrationRequest.setOrganizationId(organizationResponse.getId());
 
-        var accountResponse = accountClient.register(registrationRequest);
-        organizationResponse.setAccount(accountResponse.getBody());
+        var accountResponse = accountClient.createDefault(registrationRequest);
+        organizationResponse.setAccount(accountResponse);
         return organizationResponse;
     }
 
