@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+  organization:
+    image: "sanankazimov/taskify-organization:latest"
+    container_name: "organization"
+    ports:
+      - "8080:8080"
+  account:
+    image: "sanankazimov/taskify-account:latest"
+    container_name: "account"
+    ports:
+      - "8081:8081"
+  task:
+    image: "sanankazimov/taskify-task:latest"
+    container_name: "task"
+    ports:
+      - "8082:8082"
