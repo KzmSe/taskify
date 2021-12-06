@@ -21,10 +21,20 @@ docker-compose up
 
 ## Documentation:
 1. Organization Service
-http://localhost:8080/worganizationms/swagger-ui.html
+   http://localhost:8080/worganizationms/swagger-ui.html
 2. Account Service
-http://localhost:8081/waccountms/swagger-ui.html
+   http://localhost:8081/waccountms/swagger-ui.html
 3. Task Service
-http://localhost:8082/wtaskms/swagger-ui.html
+   http://localhost:8082/wtaskms/swagger-ui.html
 4. Notification Service
-http://localhost:8083/wnotificationms/swagger-ui.html
+   http://localhost:8083/wnotificationms/swagger-ui.html
+
+## Additional
+
+LOGIN URL: http://localhost:8081/waccountms/login:
+
+Send credentials below as (x-www-form-urlencoded):
+
+Use HTTP POST Method
+- email (String)
+- password (string)
